@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
     public class Input {
-        private double var1;
-        private double var2;
+        private int var1;
+        private int var2;
         private boolean Romatrue;
         private char oper;
 
@@ -10,26 +10,26 @@ import java.util.Scanner;
             Scanner scanner = new Scanner(System.in);
             System.out.println("Input: ");
             String value = scanner.nextLine();
-            value = value.replaceAll(" ","");
 
-            boolean arab = value.matches("^([1-9]{0,1}\\b|10{0,1}\\b)+([+/*-]\\b)+([1-9]{0,1}\\b|10{0,1}\\b)$");
-            boolean roma = value.matches("^(X\\b|IX\\b|IV\\b|V?I{0,3}\\b)+([+/*-]\\b)+(X\\b|IX\\b|IV\\b|V?I{0,3}\\b)$");
+            boolean arab = value.matches("^([1-9]{0,1}\\b|10{0,1}\\b)+(\040[+/*-]\040\\b)+([1-9]{0,1}\\b|10{0,1}\\b)$");
+            boolean roma = value.matches("^(X\\b|IX\\b|IV\\b|V?I{0,3}\\b)+(\\040[+/*-]\\040\\b)+(X\\b|IX\\b|IV\\b|V?I{0,3}\\b)$");
             if (roma || arab) {
                 if (roma) {
-
+                    value = value.replaceAll(" ","");
                     String[] romblocks = value.split("[+/*-]");
                     var1 = Roman.valueOf(romblocks[0]).getnum();
                     oper = value.charAt(romblocks[0].length());
                     var2 = Roman.valueOf(romblocks[1]).getnum();
+
                     Romatrue = true;
                 }
 
                 if (arab) {
-
+                    value = value.replaceAll(" ","");
                     String[] blocks = value.split("[+/*-]");
-                    var1 = Double.parseDouble(blocks[0]);
+                    var1 = Integer.parseInt(blocks[0]);
                     oper = value.charAt(blocks[0].length());
-                    var2 = Double.parseDouble(blocks[1]);
+                    var2 = Integer.parseInt(blocks[1]);
                     Romatrue = false;
                 }
             }
@@ -38,11 +38,11 @@ import java.util.Scanner;
             }
         }
 
-        public double getVar1() {
+        public int getVar1() {
         return var1;
         }
 
-        public double getVar2() {
+        public int getVar2() {
         return var2;
         }
 
